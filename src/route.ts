@@ -7,6 +7,6 @@ const appRouter = express();
 appRouter.post("/get-shortened-url", shorten_url);
 
 // Redirect Back to the original url
-appRouter.get("/redirect-url/:shortId" , redirectUrl);
+appRouter.get("/:shortId" , redirectUrl);
 
 export default appRouter;
