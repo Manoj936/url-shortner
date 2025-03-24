@@ -1,4 +1,4 @@
-import { redirect_url, shorten_url } from "./urlcontroller";
+import { redirectUrl , shorten_url } from "./urlcontroller";
 
 const express =  require('express')
 const appRouter = express();
@@ -7,6 +7,6 @@ const appRouter = express();
 appRouter.post("/get-shortened-url", shorten_url);
 
 // Redirect Back to the original url
-appRouter.get("/redirect-url" , redirect_url);
+appRouter.get("/redirect-url/:shortId" , redirectUrl);
 
 export default appRouter;

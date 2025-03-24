@@ -1,15 +1,12 @@
 import { Application, Request, Response } from "express";
 import appRouter from "./route";
 import connectDB from "./dbconfig";
-import { TestRedisConnection } from "./redisconfig";
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
 connectDB();
-// Testing redis connection
-TestRedisConnection()
 const app: Application = express();
 
 // Middleware

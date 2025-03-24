@@ -1,4 +1,3 @@
-import { Callback } from "ioredis";
 import Redis from "ioredis";
 const dotenv = require('dotenv');
 
