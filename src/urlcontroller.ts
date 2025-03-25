@@ -10,12 +10,14 @@ import { redisClient } from "./redisconfig";
 export const shorten_url = async (req: Request, res: Response) => {
   try {
     const { longUrl } = req.body;
-    console.log(longUrl);
+   
     if (!longUrl) {
      return res
         .status(400)
         .json({ status: false, message: "Please provide the url" });
     }
+
+    //check url is valid or not
     const checkAvailabilitResponse = await axios.head(longUrl, {
       timeout: 5000,
     });
@@ -23,7 +25,7 @@ export const shorten_url = async (req: Request, res: Response) => {
       checkAvailabilitResponse.status >= 200 &&
       checkAvailabilitResponse.status < 400
     ) {
-      // Check in MongoDB
+      // Check in redis cache
 
       let tinyUrlFromCache = await redisClient.get(longUrl);
 
@@ -33,7 +35,7 @@ export const shorten_url = async (req: Request, res: Response) => {
           .status(200)
           .json({ shortUrl: `${process.env.BASE_URL}/${tinyUrlFromCache}` });
       }
-
+      // Check in MongoDB
       const existingUrl = await URL.findOne({ longUrl });
       if (existingUrl) {
         console.log("Delivering value from exisitng data");
@@ -64,7 +66,7 @@ export const shorten_url = async (req: Request, res: Response) => {
 //Redirect to your tiny url
 export const redirectUrl = async (req: Request, res: Response) => {
   try {
-    console.log('asdasdsda')
+ 
     const { shortId } = req.params;
     console.log(shortId)
     // Check Redis cache first
