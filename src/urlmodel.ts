@@ -16,11 +16,6 @@ urlSchema.index({ longUrl: 1 });
 // ✅ TTL Index: Auto-delete URLs after 1 year (optional)
 urlSchema.index({ createdAt: 1 }, { expireAfterSeconds: 31536000 });
 
-// ✅ Compound Index for Faster Queries (shortId + longUrl)
-urlSchema.index({ shortId: 1, longUrl: 1 });
-
-// ✅ Prepare Schema for Sharding (Use Hashed Indexing for Distribution)
-urlSchema.index({ shortId: "hashed" });
 
 const URL = mongoose.model("URL", urlSchema);
 export default URL;
