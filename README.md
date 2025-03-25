@@ -67,7 +67,7 @@ BASE_URL=http://localhost:5000
 ## API Endpoints
 
 ### ➤ Shorten a URL
-**POST** `/shorten`
+**POST** `/get-shortened-url`
 #### Request Body:
 ```json
 {
